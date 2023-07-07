@@ -37,17 +37,15 @@ const DriversTables = () => {
 
     {
       name: '',
-      width:'120px',
+      width: '120px',
       selector: row => row.vehicleRegistration,
     },
     {
       name: '',
-      width:'300',
+      width: '300',
       selector: row => {
         const activityTotal = row.traces.length;
 
-        console.log('we recieved a new row length ' + row.length);
-        
         let sumRest = 0;
         let sumWork = 0;
         let sumDrive = 0;
@@ -55,29 +53,24 @@ const DriversTables = () => {
 
         if (row.traces.length >= 1) {
           for (var i = 0; i < row.traces.length; i++) {
-            console.log('trace length:  ' + row.traces[i].activity.length);
             for (var j = 0; j < row.traces[i].activity.length; j++) {
-              if (row.traces[i].activity[j].type === 'drive')
-              {
+              if (row.traces[i].activity[j].type == 'drive') {
                 sumDrive += row.traces[i].activity[j].duration;
               }
-              else if (row.traces[i].activity[j].type === 'rest')
-              {
+              else if (row.traces[i].activity[j].type == 'rest') {
                 sumRest += row.traces[i].activity[j].duration;
               }
-              else if (row.traces[i].activity[j].type === 'work')
-              {
+              else if (row.traces[i].activity[j].type == 'work') {
                 sumWork += row.traces[i].activity[j].duration;
               }
-              else
-              {
+              else {
                 sumAvail += row.traces[i].activity[j].duration;
               }
             }
           }
         }
 
-        return 'Drive: ' + sumDrive + ' | Rest: ' + sumRest+ ' | Work: ' + sumRest+ ' | Avail: ' + sumAvail;
+        return 'Drive: ' + sumDrive + ' | Rest: ' + sumRest + ' | Work: ' + sumWork + ' | Avail: ' + sumAvail;
       }
     },
     {
